@@ -1,0 +1,7 @@
+{
+  "builds": [
+    { "buildId": "B101", "status": "SUCCESS", "env": "QA" },
+    { "buildId": "B102", "status": "FAILED", "env": "STAGE", "reason": "Unit test failure" },
+    { "buildId": "B103", "status": "FAILED", "env": "PROD", "reason": "Deployment timeout" }
+  ]
+}
