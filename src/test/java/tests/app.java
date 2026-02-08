@@ -6,11 +6,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Driver;
+import java.util.Properties;
 
 public class app {
-    public static void main(String[] args) throws InterruptedException {
-        System.out.println("This project will cover E2E shopping Automation of Amazon");
+    public static void main(String[] args) throws InterruptedException, IOException {
+        System.out.println("This project will cover E2E shopping Automation");
 
        ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -19,7 +23,18 @@ public class app {
         options.addArguments("--disable-dev-shm-usage");
         WebDriver driver = new ChromeDriver(options);
 
-        driver.get("https://www.amazon.in/");
+        Properties props = new Properties();
+        FileInputStream file = new FileInputStream("config.properties");
+        props.load(file);
+
+        String user = props.getProperty("user");
+        String pass = props.getProperty("pass");
+
+        driver.findElement(By.id("ap_email")).sendKeys(user);
+        driver.findElement(By.id("ap_password")).sendKeys(pass);
+
+     String url;
+     driver.get(url);
 
         Thread.sleep(5000);
 

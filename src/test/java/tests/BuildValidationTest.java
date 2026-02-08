@@ -16,7 +16,7 @@ public class BuildValidationTest {
 
         List<Build> builds = Arrays.asList(mapper.readValue(file, Build[].class));
 
-        builds.stream()
-                .filter(build -> "b");
+        builds.stream();
+
     }
 }
