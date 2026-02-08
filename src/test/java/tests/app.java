@@ -9,14 +9,13 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.Driver;
 import java.util.Properties;
 
 public class app {
     public static void main(String[] args) throws InterruptedException, IOException {
         System.out.println("This project will cover E2E shopping Automation");
-
-       ChromeOptions options = new ChromeOptions();
+                      
+        ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 
         options.addArguments("--no-sandbox");
@@ -33,10 +32,10 @@ public class app {
         driver.findElement(By.id("ap_email")).sendKeys(user);
         driver.findElement(By.id("ap_password")).sendKeys(pass);
 
-     String url;
+     String url =  "https://amazon.in";
      driver.get(url);
 
-        Thread.sleep(5000);
+        Thread.sleep(3000);
 
         driver.findElement(By.xpath("/html/body/div[1]/header/div/div[1]/div[3]/div/div[2]/a/span")).click();
         driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[2]/div/div/div/div/span/form/div[1]/input")).click();
