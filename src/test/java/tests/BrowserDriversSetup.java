@@ -43,7 +43,7 @@ public class BrowserDriversSetup {
         if(browser.equalsIgnoreCase("chrome")){
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--remote-allow-origins=*");
-
+            options.addArguments("--headless");
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
             driver = new ChromeDriver(options);
@@ -52,7 +52,7 @@ public class BrowserDriversSetup {
             EdgeOptions options = new EdgeOptions();
 //            options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
             options.addArguments("--remote-allow-origins=*");
-
+            options.addArguments("--headless");
             // Optional: Use these for extra stability on Windows 11
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
@@ -70,13 +70,12 @@ public class BrowserDriversSetup {
             // 1. Force Selenium to wait for the browser window to be fully 'active'
             options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
 
-            // 2. Disable features that slow down startup on Windows 11
             options.addPreference("browser.tabs.remote.autostart", false);
             options.addPreference("toolkit.telemetry.enabled", false);
+            options.addArguments("-headless");
 
             driver = new FirefoxDriver(options);
 
-            // 3. CRITICAL: Give Windows 11 time to stabilize the profile folder
             try { Thread.sleep(5000); } catch (InterruptedException e) {}
 
             driver.manage().window().maximize();
