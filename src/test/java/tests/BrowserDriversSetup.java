@@ -50,10 +50,10 @@ public class BrowserDriversSetup {
         }
         else if(browser.equalsIgnoreCase("Edge")){
             EdgeOptions options = new EdgeOptions();
-//            options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+//          options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
             options.addArguments("--remote-allow-origins=*");
             options.addArguments("--headless");
-            // Optional: Use these for extra stability on Windows 11
+
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
 
@@ -67,7 +67,6 @@ public class BrowserDriversSetup {
         else if(browser.equalsIgnoreCase("firefox")){
             FirefoxOptions options = new FirefoxOptions();
 
-            // 1. Force Selenium to wait for the browser window to be fully 'active'
             options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
 
             options.addPreference("browser.tabs.remote.autostart", false);
@@ -78,7 +77,6 @@ public class BrowserDriversSetup {
 
             try { Thread.sleep(5000); } catch (InterruptedException e) {}
 
-            driver.manage().window().maximize();
         }
 
         threadDriver.set(driver);
