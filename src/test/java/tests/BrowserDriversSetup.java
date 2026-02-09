@@ -8,10 +8,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -85,7 +82,7 @@ public class BrowserDriversSetup {
         return threadDriver.get();
     }
 
-    @AfterMethod
+    @AfterClass
     public void tearDown() {
         if (threadDriver.get() != null) {
             threadDriver.get().quit();

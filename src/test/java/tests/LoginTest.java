@@ -12,7 +12,7 @@ import java.time.Duration;
 
 public class LoginTest extends BrowserDriversSetup{
 
-    @Test
+    @Test(description = "Verify successful login")
     public void loginTest() throws InterruptedException {
         var driver = getDriver();
 
