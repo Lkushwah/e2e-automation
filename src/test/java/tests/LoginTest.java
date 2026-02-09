@@ -30,7 +30,7 @@ public class LoginTest extends BrowserDriversSetup{
         String title = driver.getTitle();
         System.out.println("Title: " + title);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement titleElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("title")));
+        WebElement titleElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("app_logo")));
         String Heading = titleElement.getText();
         Assert.assertEquals(Heading, "Swag Labs", "Login Failed header 'Swag Labs' not found");
 
