@@ -33,7 +33,6 @@ public class BrowserDriversSetup {
 
     @Parameters("Browser")
     @BeforeMethod
-
     public void setup(String browser) throws IOException {
 
         props = new Properties();
