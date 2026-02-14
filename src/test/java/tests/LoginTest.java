@@ -7,7 +7,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.sql.SQLOutput;
 import java.time.Duration;
 import java.util.*;
 
@@ -112,5 +111,17 @@ public class LoginTest extends BrowserDriversSetup{
         Assert.assertEquals(chk,"https://www.saucedemo.com/checkout-step-two.html", "link verified");
         saveScreenshot("On Checkout Page");
     }
+    @Test(priority = 5, description = "Finish and acknowledge")
+    public void acknowledgeTest() throws InterruptedException {
+        var driver = getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        String checkout = driver.findElement(By.className("title")).getText();
+        Assert.assertEquals(checkout,"Checkout: Overview", "On the Checkout page");
 
+        driver.findElement(By.id("finish")).click();
+        String Complete = driver.findElement(By.className("title")).getText();
+        Assert.assertEquals(Complete,"Checkout: Complete!","Checkout completed");
+        Assert.assertEquals(driver.findElement(By.className("complete-header")).getText(),"Thank you for your order!","Thank you for your order!");
+        saveScreenshot("On Checkout Page");
+    }
 }
