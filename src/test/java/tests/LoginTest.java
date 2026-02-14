@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.sql.SQLOutput;
 import java.time.Duration;
 import java.util.*;
 
@@ -34,6 +35,7 @@ public class LoginTest extends BrowserDriversSetup{
         String Heading = titleElement.getText();
         Assert.assertEquals(Heading, "Swag Labs", "Login Failed header 'Swag Labs' not found");
 
+
     }
     @Test(priority = 2,dependsOnMethods = "loginTest",description = "select the product")
     public void selectProductTest() throws InterruptedException {
@@ -43,11 +45,13 @@ public class LoginTest extends BrowserDriversSetup{
              Map<String, By> itemsToBuy = TestData.getProducts();
 
              for (Map.Entry<String, By> item : itemsToBuy.entrySet()) {
-
-                 WebElement button = driver.findElement(item.getValue());
-                 button.click();
                  String productName = item.getKey();
-                 String text = button.getText();
+                 By locator = item.getValue();
+
+                 driver.findElement(locator).click();
+
+                 String text = driver.findElement(locator).getText();
+
                  Assert.assertEquals(text,"Remove", "Button for " + productName + " did not change to 'Remove'!");
 
              }
@@ -68,7 +72,7 @@ public class LoginTest extends BrowserDriversSetup{
         driver.findElement(TestData.CART_ICON).click();
 
         String title = driver.findElement(By.className("title")).getText();
-        Assert.assertEquals(title, "Your cart" ,"this is done" );
+        Assert.assertEquals(title, "Your Cart" ,"In the Cart" );
 
         List<WebElement> cartElements = driver.findElements(TestData.CART_ITEM_NAME);
         List<String> actualCartProducts = new ArrayList<>();
@@ -87,9 +91,26 @@ public class LoginTest extends BrowserDriversSetup{
         Assert.assertEquals(actualCartProducts.size(), expectedProducts.size(),
                 "The number of items in the cart does not match selection!");
 
-        driver.findElement(TestData.CHECKOUT_BTN).click();
         saveScreenshot("Cart_Verified_Successfully");
     }
 
+    @Test(priority = 4,description = "Final Checkout and validation")
+    public void finalCheckoutTest() throws InterruptedException {
+        var driver = getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        driver.findElement(TestData.CHECKOUT_BTN).click();
+        String title = driver.findElement(By.className("title")).getText();
+        Assert.assertEquals(title,"Checkout: Your Information","You are on Your Information");
+        System.out.println("Entering Info from config");
+
+        driver.findElement(By.id("first-name")).sendKeys(props.getProperty("FName"));
+        driver.findElement(By.id("last-name")).sendKeys(props.getProperty("LName"));
+        driver.findElement(By.id("postal-code")).sendKeys(props.getProperty("ZIP"));
+
+        driver.findElement(By.id("continue")).click();
+        String chk = driver.getCurrentUrl();
+        Assert.assertEquals(chk,"https://www.saucedemo.com/checkout-step-two.html", "link verified");
+        saveScreenshot("On Checkout Page");
+    }
 
 }
