@@ -23,4 +23,39 @@
 <!--        </classes>-->
 
     </test>
+
+</suite>
+<suite name="PlaywrightCrossBrowser" parallel="tests" thread-count="1">
+<test name="Playwright-Chrome">
+    <parameter name="Browser" value="chromium"/>
+    <classes><class name="playwrightTests.PlaywrightLoginTest"/></classes>
+</test>
+<!--<test name="Playwright-Firefox">-->
+<!--    <parameter name="Browser" value="firefox"/>-->
+<!--    <classes><class name="playwrightTests.PlaywrightLoginTest"/></classes>-->
+<!--</test>-->
+<!--<test name="Playwright-Safari">-->
+<!--    <parameter name="Browser" value="webkit"/>-->
+<!--    <classes><class name="playwrightTests.PlaywrightLoginTest"/></classes>-->
+<!--</test>-->
+</suite>
+
+<suite name="MobileEmulationSuite" parallel="tests" thread-count="2">
+
+<test name="iPhone-Test">
+    <parameter name="Browser" value="webkit"/>
+    <parameter name="Device" value="iPhone 13"/>
+    <classes>
+        <class name="playwrightTests.PlaywrightLoginTest"/>
+    </classes>
+</test>
+
+<test name="Android-Test">
+    <parameter name="Browser" value="chromium"/>
+    <parameter name="Device" value="Pixel 5"/>
+    <classes>
+        <class name="playwrightTests.PlaywrightLoginTest"/>
+    </classes>
+</test>
+
 </suite>
