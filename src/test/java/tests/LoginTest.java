@@ -8,8 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 
 public class LoginTest extends BrowserDriversSetup{
@@ -64,7 +63,32 @@ public class LoginTest extends BrowserDriversSetup{
     @Test(priority = 3,dependsOnMethods = "selectProductTest",description = "Check on the cart page")
     public void checkCartTest() throws InterruptedException {
         var driver = getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
+        driver.findElement(TestData.CART_ICON).click();
+
+        String title = driver.findElement(By.className("title")).getText();
+        Assert.assertEquals(title, "Your cart" ,"this is done" );
+
+        List<WebElement> cartElements = driver.findElements(TestData.CART_ITEM_NAME);
+        List<String> actualCartProducts = new ArrayList<>();
+
+        for (WebElement element : cartElements) {
+            actualCartProducts.add(element.getText());
+        }
+
+        Set<String> expectedProducts = TestData.getProducts().keySet();
+
+        for (String expectedName : expectedProducts) {
+            Assert.assertTrue(actualCartProducts.contains(expectedName),
+                    "Product '" + expectedName + "' was not found in the cart!");
+        }
+
+        Assert.assertEquals(actualCartProducts.size(), expectedProducts.size(),
+                "The number of items in the cart does not match selection!");
+
+        driver.findElement(TestData.CHECKOUT_BTN).click();
+        saveScreenshot("Cart_Verified_Successfully");
     }
 
 

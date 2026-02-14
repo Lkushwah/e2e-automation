@@ -15,7 +15,7 @@ public class TestData {
         return products;
     }
     // Inside utils.TestData
-    public static final By CART_ICON = By.className("shopping_cart_link");
+    public static final By CART_ICON = By.className("shopping_cart_badge");
     public static final By CHECKOUT_BTN = By.id("checkout");
     public static final By CART_ITEM_NAME = By.className("inventory_item_name");
 }
