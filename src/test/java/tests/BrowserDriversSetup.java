@@ -1,6 +1,9 @@
 package tests;
 
+import io.qameta.allure.Attachment;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.PageLoadStrategy;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -29,7 +32,7 @@ public class BrowserDriversSetup {
     }
 
     @Parameters("Browser")
-    @BeforeMethod
+    @BeforeClass
     public void setup(String browser) throws IOException {
 
         props = new Properties();
@@ -49,7 +52,7 @@ public class BrowserDriversSetup {
             EdgeOptions options = new EdgeOptions();
 //          options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
             options.addArguments("--remote-allow-origins=*");
-            options.addArguments("--headless");
+//            options.addArguments("--headless");
 
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
@@ -88,6 +91,11 @@ public class BrowserDriversSetup {
             threadDriver.get().quit();
             threadDriver.remove();
         }
+    }
+
+    @Attachment(value = "{0}", type = "image/png")
+    public byte[] saveScreenshot(String name) {
+        return ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
     }
 
 }

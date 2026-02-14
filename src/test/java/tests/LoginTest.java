@@ -8,11 +8,13 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class LoginTest extends BrowserDriversSetup{
 
-    @Test(description = "Verify successful login")
+    @Test(priority = 1,description = "Verify successful login")
     public void loginTest() throws InterruptedException {
         var driver = getDriver();
 
@@ -34,5 +36,36 @@ public class LoginTest extends BrowserDriversSetup{
         Assert.assertEquals(Heading, "Swag Labs", "Login Failed header 'Swag Labs' not found");
 
     }
+    @Test(priority = 2,dependsOnMethods = "loginTest",description = "select the product")
+    public void selectProductTest() throws InterruptedException {
+
+         try {
+             var driver = getDriver();
+             Map<String, By> itemsToBuy = TestData.getProducts();
+
+             for (Map.Entry<String, By> item : itemsToBuy.entrySet()) {
+
+                 WebElement button = driver.findElement(item.getValue());
+                 button.click();
+                 String productName = item.getKey();
+                 String text = button.getText();
+                 Assert.assertEquals(text,"Remove", "Button for " + productName + " did not change to 'Remove'!");
+
+             }
+             saveScreenshot("All_Items_Added");
+
+         }
+        catch (Exception e) {
+            saveScreenshot("Failed");
+            throw e;
+        }
+    }
+
+    @Test(priority = 3,dependsOnMethods = "selectProductTest",description = "Check on the cart page")
+    public void checkCartTest() throws InterruptedException {
+        var driver = getDriver();
+
+    }
+
 
 }

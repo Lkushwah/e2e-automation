@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Setup and Login" parallel="tests" thread-count="1">
+<suite name="Setup and Login" parallel="none" thread-count="1">
 <!--    <test name="ChromeTest">-->
 <!--        <parameter name="Browser" value="Chrome"/>-->
 <!--        <classes>-->
@@ -9,18 +9,18 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-<!--    <test name="EdgeTest">-->
-<!--        <parameter name="Browser" value="Edge"/>-->
-<!--        <classes>-->
-<!--                <class name="tests.LoginTest"></class>-->
-<!--        </classes>-->
+    <test name="EdgeTest">
+        <parameter name="Browser" value="Edge"/>
+        <classes>
+                <class name="tests.LoginTest"></class>
+        </classes>
 
 <!--    </test>-->
-    <test name="Firefox">
-        <parameter name="Browser" value="Firefox"/>
-        <classes>
-            <class name="tests.LoginTest"></class>
-        </classes>
+<!--    <test name="Firefox">-->
+<!--        <parameter name="Browser" value="Firefox"/>-->
+<!--        <classes>-->
+<!--            <class name="tests.LoginTest"></class>-->
+<!--        </classes>-->
 
     </test>
 </suite>
