@@ -1,19 +1,21 @@
-# 🚀 Hybrid SDET Framework: Selenium & Playwright Integration
+# 🚀 Hybrid SDET E-Commerce Framework: Selenium & Playwright Integration 
 
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
 ![Java Version](https://img.shields.io/badge/Java-24-blue)
-![Automation](https://img.shields.io/badge/Automation-Selenium%20%26%20Playwright-orange)
+![Reporting](https://img.shields.io/badge/Reporting-Allure-red)
 
-A professional-grade, cross-browser automation ecosystem designed for high-performance end-to-end (E2E) testing. This framework demonstrates a dual-engine approach to automating the [SauceDemo](https://www.saucedemo.com/) platform, focusing on scalability, mobile responsiveness, and industry-standard OOPS principles.
+A professional-grade, cross-browser automation ecosystem designed for high-performance E2E testing. This framework demonstrates a unique **Dual-Engine approach**, bridging **Selenium 4** and **Playwright Java** to automate the [SauceDemo](https://www.saucedemo.com/) platform.
+
+---
 
 ## 🏗️ Architectural Highlights & OOPS Concepts
 
-This project is built on core Object-Oriented Programming principles to ensure "Real-World" maintainability:
+This project implements industry-standard OOPS principles to ensure enterprise-level maintainability:
 
-* **Inheritance**: Tiered `BaseTest` architecture (`BrowserDriversSetup` and `PlaywrightBase`) centralizes browser lifecycle management.
-* **Encapsulation**: Centralized locators in `TestData` and environment configs in `.properties` files shield test logic from UI changes.
-* **Polymorphism**: Dynamic browser instantiation allows a single script to execute across Chromium, Firefox, and WebKit via TestNG parameters.
-* **Abstraction**: Logical separation between "What to test" (Test Scripts) and "How to interact" (Utility Layers).
+* **Inheritance**: Tiered `BaseTest` architecture (`BrowserDriversSetup` and `playwrightBase`) centralizes browser lifecycle and driver management.
+* **Encapsulation**: UI locators and environment configurations are isolated within `TestData.java`, shielding test logic from DOM changes.
+* **Polymorphism**: Dynamic browser instantiation (Chromium, Firefox, WebKit) and device emulation via TestNG `@Parameters`.
+* **Abstraction**: Logical separation between "What to test" (Test Scripts) from "How to interact" (Utility Layers and Engine Logic).
 
 ---
 
@@ -21,26 +23,25 @@ This project is built on core Object-Oriented Programming principles to ensure "
 
 | Layer | Technology |
 | :--- | :--- |
-| **Language** | Java 24 |
-| **Automation Engines** | Selenium WebDriver 4 & Microsoft Playwright |
-| **Testing Framework** | TestNG (Parallel Execution & Parameterization) |
-| **Reporting** | Allure Reports (Interactive Dashboards) |
-| **Emulation** | Playwright Device Registry (Mobile Simulation) |
+| **Language** | **Java 24** (Modern Syntax) |
+| **Automation** | Selenium WebDriver 4 & Playwright Java 1.58.0 |
+| **Test Runner** | TestNG (Parallel Execution & Parameterization) |
+| **Reporting** | **Allure Reports** (Interactive Dashboards) |
+| **Emulation** | Manual Java Device Profiling (Viewport, UserAgent, Touch) |
 
 ---
 
 ## 📱 Mobile & Cross-Browser Strategy
 
-* **Mobile Emulation**: Native simulation of **iPhone 13** and **Pixel 5** using Playwright’s `DeviceDescriptor`, handling touch events and mobile viewports.
-* **Thread-Safe Parallelism**: Configured for simultaneous Selenium and Playwright execution across multiple threads without session collision.
-* **Robust Synchronization**: Combines Selenium’s **Explicit Waits** with Playwright’s **Auto-waiting** to handle asynchronous DOM updates.
-
-
+* **Java-Specific Mobile Emulation**: Implements manual device profiling for **iPhone 13** and **Pixel 5** using `Browser.NewContextOptions`. This bypasses the limitations of the Java API to provide native mobile simulation.
+* **Thread-Safe Parallelism**: Configured for simultaneous engine execution across multiple threads without session collision or driver leaks.
+* **Advanced Synchronization**: Leverages Playwright’s **Auto-waiting** alongside Selenium's **Explicit Waits** to handle asynchronous DOM updates and dynamic state changes.
 
 ---
 
 ## 🚦 Execution & Reporting
 
 ### Local Execution
+To execute the full suite and launch the interactive report:
 ```bash
 mvn clean test allure:serve
