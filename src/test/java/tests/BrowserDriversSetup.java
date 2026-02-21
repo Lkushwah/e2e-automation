@@ -23,12 +23,12 @@ public class BrowserDriversSetup {
 
     @BeforeSuite
     public void beforeSuite(){
-//       try{
-//           ProcessBuilder pb = new ProcessBuilder("cmd", "/c",
-//           "taskkill /F /IM geckodriver.exe /IM chromedriver.exe /IM msedgedriver.exe /IM firefox.exe /IM chrome.exe /IM msedge.exe /T");
-//        pb.start().waitFor();
-//       }
-//       catch(Exception e){}
+       try{
+           ProcessBuilder pb = new ProcessBuilder("cmd", "/c",
+           "taskkill /F /IM geckodriver.exe /IM chromedriver.exe /IM msedgedriver.exe /IM firefox.exe /IM chrome.exe /IM msedge.exe /T");
+        pb.start().waitFor();
+       }
+       catch(Exception e){}
     }
 
     @Parameters("Browser")
@@ -43,7 +43,7 @@ public class BrowserDriversSetup {
         if(browser.equalsIgnoreCase("chrome")){
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--remote-allow-origins=*");
-            options.addArguments("--headless");
+//            options.addArguments("--headless");
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
             driver = new ChromeDriver(options);
